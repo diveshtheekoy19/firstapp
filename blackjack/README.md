@@ -1,32 +1,56 @@
-# React + TypeScript + Vite
+# Blackjack
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A blackjack game for the browser, built with React, TypeScript and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Bet with $5, $25, $100 and $500 chips from a $1,000 starting bankroll
+- Hit, stand, double down and split pairs (up to four hands)
+- Dealer plays one card at a time
+- Win / loss / push tally and a count of cards left in the shoe
+- Bankroll is saved in your browser between visits
+- Works on desktop and phone screens
 
-## React Compiler
+## Rules
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Six decks, reshuffled once three quarters of the shoe has been dealt
+- Blackjack pays 3 to 2
+- Dealer stands on all 17s, including soft 17
+- If the dealer has blackjack, the hand ends immediately
+- Any two cards of the same value can be split (K-10 counts as a pair)
+- Double down is allowed on any two cards, including after a split
+- Split aces receive one card each
+- 21 on a split hand pays 1 to 1, not 3 to 2
 
-## Expanding the Oxlint configuration
+## Keyboard shortcuts
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+| Key | Action |
+| --- | --- |
+| `H` | Hit |
+| `S` | Stand |
+| `D` | Double down |
+| `P` | Split |
+| `Enter` / `Space` | Deal / next hand |
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Running it
+
+Requires [Node.js](https://nodejs.org/).
+
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Then open http://localhost:5173.
+
+Other scripts:
+
+- `npm run build` – type-check and build for production into `dist/`
+- `npm run preview` – serve the production build locally
+- `npm run lint` – lint with oxlint
+
+## Code layout
+
+- `src/game.ts` – deck, hand values and payout rules (no React)
+- `src/App.tsx` – game flow and the table UI
+- `src/App.css`, `src/index.css` – styles
